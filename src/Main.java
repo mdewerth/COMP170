@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.time.LocalDate;
+
 
 public class Main {
     public static void main(String[] args)  {
@@ -17,11 +17,12 @@ public class Main {
 
         System.out.println("Property Manager");
         System.out.println("Type a command to begin...");
-        System.out.println("\"END\" to end the program");
-        System.out.println("\"CREATE\" to create a new entity");
-        System.out.println("\"CHECK\" to check on rent");
-        System.out.println("\"PAY\" to mark payment toward rent");
-        while(!run.equalsIgnoreCase("end")) {
+        boolean done = false;
+        while(!done) {
+            System.out.println("\"END\" to end the program");
+            System.out.println("\"CREATE\" to create a new entity");
+            System.out.println("\"CHECK\" to check on rent");
+            System.out.println("\"PAY\" to mark payment toward rent");
             run = keyboard.nextLine();
             while (run.equalsIgnoreCase("create"))  {
                 System.out.println("Create a new entity: type an entity to begin:");
@@ -48,7 +49,7 @@ public class Main {
                     System.out.println("Enter an address");
                     building1.setBuildingAddress(keyboard.nextLine());
                     System.out.println("Enter number of units");
-                    building1.setUnitCount(keyboard.nextInt());
+                    building1.setUnitCount(Integer.parseInt(keyboard.nextLine()));
                     portfolio1.addBuilding(building1);
 
 
@@ -67,7 +68,7 @@ public class Main {
                     System.out.println("Enter a name");
                     lease1.setLeaseName(keyboard.nextLine());
                     System.out.println("Set rent rate:");
-                    lease1.setRent(keyboard.nextInt());
+                    lease1.setRent(Integer.parseInt(keyboard.nextLine()));
                     lease1.setRentOwed();
                     lease1.setPaid();
                     lease1.setRentDue();
@@ -89,21 +90,19 @@ public class Main {
             }
             if(run.equalsIgnoreCase("pay"))  {
                 System.out.println("Enter a payment amount");
-                lease1.payRent(keyboard.nextInt());
+                lease1.payRent(Integer.parseInt(keyboard.nextLine()));
                 lease1.setRentDue();
 
 
             }
-            System.out.println("Enter a command");
-            System.out.println("\"END\" to end the program");
-            System.out.println("\"CREATE\" to create a new entity");
-            System.out.println("\"CHECK\" to check on rent");
-            System.out.println("\"PAY\" to mark payment toward rent");
-            run = keyboard.nextLine();
+            if(run.equalsIgnoreCase("end")) {
+                keyboard.close();
+                done = true;
+            }
 
 
         }
-        keyboard.close();
+
 
 
 
